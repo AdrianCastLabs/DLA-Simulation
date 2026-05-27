@@ -1,11 +1,13 @@
+from math import ceil
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+gridSize = 25
+grid = np.zeros((gridSize, gridSize))
 
-grid = np.zeros((100, 100))
-
-xPos = 50
-yPos = 50
+xPos = ceil(gridSize / 2)
+yPos = ceil(gridSize / 2)
 
 grid[xPos, yPos] = 1
 
@@ -16,26 +18,26 @@ def MoveParticle(direction):
     global xPos
     global yPos
 
+    newX = xPos
+    newY = yPos
+
     if direction == 1:
-        grid[xPos + 1, yPos + 0] = 1
-        #grid[xPos, yPos] = 0
-        xPos += 1
+        newX += 1
     if direction == 2:
-        grid[xPos + 0, yPos - 1] = 1
-        #grid[xPos, yPos] = 0
-        yPos -= 1
+        newY -= 1
     if direction == 3:
-        grid[xPos - 1, yPos + 0] = 1
-        #grid[xPos, yPos] = 0
-        xPos -= 1
+        newX -= 1
     if direction == 4:
-        grid[xPos + 0, yPos + 1] = 1
-        #grid[xPos, yPos] = 0
-        yPos += 1
+        newY += 1
+
+    # Check bounds
+    if 0 <= newX < gridSize and 0 <= newY < gridSize:
+        grid[newX, newY] = 1
+        xPos = newX
+        yPos = newY
 
 def update(frame):
-    global xPos
-    global yPos
+
 
     MoveParticle(np.random.randint(1, 5))
 
