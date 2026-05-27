@@ -3,7 +3,7 @@ from math import ceil
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-gridSize = 30
+gridSize = 120
 grid = np.zeros((gridSize, gridSize))
 
 xPos = ceil(gridSize / 2)
@@ -59,7 +59,8 @@ def CheckCollisions(newX, newY):
     return isNotColliding
 
 def update(frame):
-    MoveParticle(np.random.randint(1, 5))
+    for i in range(10000):
+        MoveParticle(np.random.randint(1, 5))
 
     image.set_array(grid)
 
